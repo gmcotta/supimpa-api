@@ -4,6 +4,13 @@ import { getRepository } from 'typeorm';
 import Institution from '../models/Institution';
 
 export default {
+  async index(request: Request, response: Response): Promise<Response> {
+    const institutionRepository = getRepository(Institution);
+
+    const institutions = await institutionRepository.find();
+
+    return response.json(institutions);
+  },
   async create(request: Request, response: Response): Promise<Response> {
     const {
       name,

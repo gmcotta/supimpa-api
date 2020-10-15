@@ -34,6 +34,11 @@ export default {
       open_on_weekends,
     } = request.body;
 
+    const requestImages = request.files as Express.Multer.File[];
+    const images = requestImages.map(image => {
+      return { path: image.filename };
+    });
+
     const institutionRepository = getRepository(Institution);
 
     const institution = institutionRepository.create({
@@ -46,6 +51,7 @@ export default {
       instructions,
       opening_hours,
       open_on_weekends,
+      images,
     });
     await institutionRepository.save(institution);
 

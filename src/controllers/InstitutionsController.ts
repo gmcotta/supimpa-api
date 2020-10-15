@@ -2,23 +2,28 @@ import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 
 import Institution from '../models/Institution';
+import InstitutionView from '../views/InstitutionsView';
 
 export default {
   async index(request: Request, response: Response): Promise<Response> {
     const institutionRepository = getRepository(Institution);
 
-    const institutions = await institutionRepository.find();
+    const institutions = await institutionRepository.find({
+      relations: ['images'],
+    });
 
-    return response.json(institutions);
+    return response.json(InstitutionView.renderMany(institutions));
   },
 
   async show(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
     const institutionRepository = getRepository(Institution);
 
-    const institutions = await institutionRepository.findOneOrFail(id);
+    const institution = await institutionRepository.findOneOrFail(id, {
+      relations: ['images'],
+    });
 
-    return response.json(institutions);
+    return response.json(InstitutionView.render(institution));
   },
 
   async create(request: Request, response: Response): Promise<Response> {

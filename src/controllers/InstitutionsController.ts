@@ -11,6 +11,16 @@ export default {
 
     return response.json(institutions);
   },
+
+  async show(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+    const institutionRepository = getRepository(Institution);
+
+    const institutions = await institutionRepository.findOneOrFail(id);
+
+    return response.json(institutions);
+  },
+
   async create(request: Request, response: Response): Promise<Response> {
     const {
       name,

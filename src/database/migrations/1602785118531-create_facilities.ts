@@ -45,7 +45,7 @@ export default class createFacilities1602785118531
           },
           {
             name: 'instructions',
-            type: 'varchar',
+            type: 'text',
           },
           {
             name: 'opening_hours',

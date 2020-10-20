@@ -2,6 +2,9 @@ import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 import * as Yup from 'yup';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+
+import authConfig from '../config/auth';
 
 import AdminUser from '../models/AdminUser';
 
@@ -29,6 +32,12 @@ export default {
       return response.status(401).json({ error: 'Password does not match' });
     }
 
-    return response.json({ ok: true });
+    const { id, name } = adminUser;
+
+    const token = jwt.sign({ id }, authConfig.secret, {
+      expiresIn: authConfig.expiresIn,
+    });
+
+    return response.json({ user: { id, name, email }, token });
   },
 };

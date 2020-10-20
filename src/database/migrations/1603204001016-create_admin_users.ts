@@ -5,7 +5,7 @@ export default class createAdminUsers1603204001016
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'AdminUsers',
+        name: 'admin-users',
         columns: [
           {
             name: 'id',

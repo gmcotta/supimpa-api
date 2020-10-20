@@ -26,6 +26,11 @@ export default {
 
     const adminUserRepository = getRepository(AdminUser);
 
+    const emailExists = await adminUserRepository.findOne({ where: { email } });
+    if (emailExists) {
+      return response.status(401).json({ error: 'E-mail already registered' });
+    }
+
     password = await bcrypt.hash(password, 8);
 
     const adminUser = adminUserRepository.create({ name, email, password });

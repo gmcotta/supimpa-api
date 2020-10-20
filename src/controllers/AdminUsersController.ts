@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import bcrypt from 'bcrypt';
 
 import AdminUser from '../models/AdminUser';
+import adminUserView from '../views/AdminUsersView';
 
 export default {
   async create(request: Request, response: Response): Promise<Response> {
@@ -37,5 +38,19 @@ export default {
     await adminUserRepository.save(adminUser);
 
     return response.status(201).json(adminUser);
+  },
+
+  async show(request: Request, response: Response): Promise<Response> {
+    const { id } = request.user;
+
+    if (!id) {
+      return response.status(400).json({ error: 'User not logged in' });
+    }
+
+    const adminUserRepository = getRepository(AdminUser);
+
+    const adminUser = await adminUserRepository.findOneOrFail(id);
+
+    return response.json(adminUserView.render(adminUser));
   },
 };

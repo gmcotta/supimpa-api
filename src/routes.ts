@@ -27,5 +27,10 @@ routes.post('/admin/session', sessionsController.create);
 routes.use(authMiddleware);
 routes.post('/admin/users', adminUsersController.create);
 routes.get('/admin/users', adminUsersController.show);
+routes.put(
+  '/admin/institutions/edit/:id',
+  upload.array('images'),
+  institutionsController.update,
+);
 
 export default routes;

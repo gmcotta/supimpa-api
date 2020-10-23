@@ -40,6 +40,9 @@ export default class Institution {
   @Column()
   open_on_weekends: boolean;
 
+  @Column()
+  accepted: boolean;
+
   @OneToMany(() => Image, image => image.institution, {
     cascade: ['insert', 'update'],
   })

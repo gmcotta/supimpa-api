@@ -12,6 +12,7 @@ type InstitutionResponse = {
   instructions: string;
   opening_hours: string;
   open_on_weekends: boolean;
+  accepted: boolean;
   images: ImageResponse[];
 };
 
@@ -28,6 +29,7 @@ export default {
       instructions: institution.instructions,
       opening_hours: institution.opening_hours,
       open_on_weekends: institution.open_on_weekends,
+      accepted: institution.accepted,
       images: ImagesView.renderMany(institution.images),
     };
   },

@@ -8,12 +8,32 @@ import InstitutionView from '../views/InstitutionsView';
 
 export default {
   async index(request: Request, response: Response): Promise<Response> {
+    const { accepted } = request.query;
     const institutionRepository = getRepository(Institution);
+
+    if (accepted === 'true') {
+      const institutions = await institutionRepository.find({
+        relations: ['images'],
+        where: {
+          accepted: true,
+        },
+      });
+      return response.json(InstitutionView.renderMany(institutions));
+    }
+
+    if (accepted === 'false') {
+      const institutions = await institutionRepository.find({
+        relations: ['images'],
+        where: {
+          accepted: false,
+        },
+      });
+      return response.json(InstitutionView.renderMany(institutions));
+    }
 
     const institutions = await institutionRepository.find({
       relations: ['images'],
     });
-
     return response.json(InstitutionView.renderMany(institutions));
   },
 

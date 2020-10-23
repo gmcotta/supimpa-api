@@ -177,4 +177,21 @@ export default {
 
     return response.json(data);
   },
+
+  async delete(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+
+    const institutionRepository = getRepository(Institution);
+
+    const institution = await institutionRepository.findOneOrFail(id);
+    if (!institution) {
+      return response.status(401).json({ error: 'Institution not found' });
+    }
+
+    await institutionRepository.remove(institution);
+
+    return response.json({
+      message: `Institution ${institution.name} deleted`,
+    });
+  },
 };

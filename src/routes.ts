@@ -32,5 +32,6 @@ routes.put(
   upload.array('images'),
   institutionsController.update,
 );
+routes.delete('/admin/institutions/delete/:id', institutionsController.delete);
 
 export default routes;

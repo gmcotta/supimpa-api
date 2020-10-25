@@ -8,9 +8,19 @@ import InstitutionView from '../views/InstitutionsView';
 
 export default {
   async index(request: Request, response: Response): Promise<Response> {
-    const { accepted } = request.query;
+    const { accepted, retirement_or_center } = request.query;
     const institutionRepository = getRepository(Institution);
 
+    if (accepted === 'true' && retirement_or_center !== undefined) {
+      const institutions = await institutionRepository.find({
+        relations: ['images'],
+        where: {
+          accepted: true,
+          retirement_or_center,
+        },
+      });
+      return response.json(InstitutionView.renderMany(institutions));
+    }
     if (accepted === 'true') {
       const institutions = await institutionRepository.find({
         relations: ['images'],
@@ -21,6 +31,16 @@ export default {
       return response.json(InstitutionView.renderMany(institutions));
     }
 
+    if (accepted === 'false' && retirement_or_center !== undefined) {
+      const institutions = await institutionRepository.find({
+        relations: ['images'],
+        where: {
+          accepted: false,
+          retirement_or_center,
+        },
+      });
+      return response.json(InstitutionView.renderMany(institutions));
+    }
     if (accepted === 'false') {
       const institutions = await institutionRepository.find({
         relations: ['images'],
@@ -121,6 +141,7 @@ export default {
       instructions,
       opening_hours,
       open_on_weekends,
+      accepted,
     } = request.body;
 
     const { id } = request.params;
@@ -140,6 +161,7 @@ export default {
       instructions,
       opening_hours,
       open_on_weekends: open_on_weekends === 'true',
+      accepted: accepted === 'true',
       id: Number(id),
     };
 

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getRepository } from 'typeorm';
+import { getRepository, Between, getConnection } from 'typeorm';
 import * as Yup from 'yup';
 
 import Institution from '../models/Institution';
@@ -9,6 +9,7 @@ import InstitutionView from '../views/InstitutionsView';
 export default {
   async index(request: Request, response: Response): Promise<Response> {
     const { accepted, retirement_or_center } = request.query;
+
     const institutionRepository = getRepository(Institution);
 
     if (accepted === 'true' && retirement_or_center !== undefined) {

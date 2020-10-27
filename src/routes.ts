@@ -4,6 +4,7 @@ import multer from 'multer';
 import institutionsController from './controllers/InstitutionsController';
 import adminUsersController from './controllers/AdminUsersController';
 import sessionsController from './controllers/SessionsController';
+import forgotPasswordController from './controllers/ForgotPasswordController';
 
 import authMiddleware from './middlewares/auth';
 
@@ -12,7 +13,7 @@ import uploadConfig from './config/upload';
 const routes = Router();
 const upload = multer(uploadConfig);
 
-// Parte do aplicativo
+// App routes
 routes.get('/institutions', institutionsController.index);
 routes.get('/institutions/:id', institutionsController.show);
 routes.post(
@@ -21,9 +22,11 @@ routes.post(
   institutionsController.create,
 );
 
-// Parte administrativa
+// Admin routes
 routes.post('/admin/session', sessionsController.create);
-// Precisa estar autenticado para entrar
+routes.post('/admin/forgot-password', forgotPasswordController.store);
+
+// Admin private routes
 routes.use(authMiddleware);
 routes.post('/admin/users', adminUsersController.create);
 routes.get('/admin/users', adminUsersController.show);

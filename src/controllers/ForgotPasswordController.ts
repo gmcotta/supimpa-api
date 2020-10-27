@@ -3,6 +3,8 @@ import { getRepository } from 'typeorm';
 import * as Yup from 'yup';
 import { v4 } from 'uuid';
 
+import Mail from '../lib/Mail';
+
 import AdminUser from '../models/AdminUser';
 import UserToken from '../models/UserToken';
 
@@ -21,13 +23,21 @@ export default {
       return response.status(400).json({ error: 'User not found' });
     }
 
-    const { id } = adminUser;
+    const { id, name, email: userEmail } = adminUser;
 
     const userTokenRepository = getRepository(UserToken);
     const token = v4();
-
     const userToken = userTokenRepository.create({ token, user_id: id });
     await userTokenRepository.save(userToken);
+
+    await Mail.sendMail({
+      to: {
+        name,
+        address: userEmail,
+      },
+      subject: 'Esqueci minha senha',
+      html: `<p>Faça a redefinição de senha a partir <a href="http://localhost:3000/admin/reset-password/${token}">desse link</a>`,
+    });
 
     return response.json(userToken);
   },

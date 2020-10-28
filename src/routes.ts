@@ -5,6 +5,7 @@ import institutionsController from './controllers/InstitutionsController';
 import adminUsersController from './controllers/AdminUsersController';
 import sessionsController from './controllers/SessionsController';
 import forgotPasswordController from './controllers/ForgotPasswordController';
+import resetPasswordController from './controllers/ResetPasswordController';
 
 import authMiddleware from './middlewares/auth';
 
@@ -25,6 +26,7 @@ routes.post(
 // Admin routes
 routes.post('/admin/session', sessionsController.create);
 routes.post('/admin/forgot-password', forgotPasswordController.store);
+routes.post('/admin/reset-password', resetPasswordController.store);
 
 // Admin private routes
 routes.use(authMiddleware);

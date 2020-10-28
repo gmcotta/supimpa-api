@@ -36,7 +36,7 @@ export default {
         address: userEmail,
       },
       subject: 'Esqueci minha senha',
-      html: `<p>Faça a redefinição de senha a partir <a href="http://localhost:3000/admin/reset-password/${token}">desse link</a>`,
+      html: `<p>Faça a redefinição de senha a partir <a href="http://localhost:3000/admin/reset-password/${token}">desse link.</a>`,
     });
 
     return response.json(userToken);

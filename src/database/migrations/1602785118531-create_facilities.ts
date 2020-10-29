@@ -21,15 +21,11 @@ export default class createFacilities1602785118531
           },
           {
             name: 'latitude',
-            type: 'decimal',
-            scale: 10,
-            precision: 2,
+            type: 'varchar',
           },
           {
             name: 'longitude',
-            type: 'decimal',
-            scale: 10,
-            precision: 2,
+            type: 'varchar',
           },
           {
             name: 'about',

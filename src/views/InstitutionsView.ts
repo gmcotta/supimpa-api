@@ -21,8 +21,8 @@ export default {
     return {
       id: institution.id,
       name: institution.name,
-      latitude: institution.latitude,
-      longitude: institution.longitude,
+      latitude: Number(institution.latitude),
+      longitude: Number(institution.longitude),
       about: institution.about,
       retirement_or_center: institution.retirement_or_center,
       phone: institution.phone,

@@ -29,14 +29,19 @@ routes.post('/admin/forgot-password', forgotPasswordController.store);
 routes.post('/admin/reset-password', resetPasswordController.store);
 
 // Admin private routes
-routes.use(authMiddleware);
-routes.post('/admin/users', adminUsersController.create);
-routes.get('/admin/users', adminUsersController.show);
+// routes.use(authMiddleware);
+routes.post('/admin/users', authMiddleware, adminUsersController.create);
+routes.get('/admin/users', authMiddleware, adminUsersController.show);
 routes.put(
   '/admin/institutions/edit/:id',
   upload.array('images'),
+  authMiddleware,
   institutionsController.update,
 );
-routes.delete('/admin/institutions/delete/:id', institutionsController.delete);
+routes.delete(
+  '/admin/institutions/delete/:id',
+  authMiddleware,
+  institutionsController.delete,
+);
 
 export default routes;

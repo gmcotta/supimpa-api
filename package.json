@@ -5,7 +5,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
-    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
+    "build": "tsc",
+    "start": "node dist/server.js"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
@@ -17,6 +19,7 @@
     "knex": "^0.21.7",
     "multer": "^1.4.2",
     "nodemailer": "^6.4.14",
+    "pg": "^8.4.2",
     "sqlite3": "^5.0.0",
     "typeorm": "^0.2.28",
     "uuid": "^8.3.1",

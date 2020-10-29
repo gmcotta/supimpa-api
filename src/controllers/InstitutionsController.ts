@@ -131,7 +131,6 @@ export default {
   },
 
   async update(request: Request, response: Response): Promise<Response> {
-    console.log('começo do update');
     const {
       name,
       latitude,

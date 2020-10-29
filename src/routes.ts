@@ -15,6 +15,7 @@ const routes = Router();
 const upload = multer(uploadConfig);
 
 // App routes
+routes.get('/', (request, response) => response.json({ ok: true }));
 routes.get('/institutions', institutionsController.index);
 routes.get('/institutions/:id', institutionsController.show);
 routes.post(

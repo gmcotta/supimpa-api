@@ -9,7 +9,7 @@ export default {
   render(image: Image): ImageResponse {
     return {
       id: image.id,
-      url: `${process.env.API_HOST}:${process.env.API_PORT}/uploads/${image.path}`,
+      url: `${process.env.API_URL}/uploads/${image.path}`,
     };
   },
 

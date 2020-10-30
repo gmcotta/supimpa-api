@@ -10,7 +10,6 @@ export default {
   async store(request: Request, response: Response): Promise<Response> {
     const { confirm_password, token } = request.body;
     let { password } = request.body;
-    console.log(password, confirm_password, token);
 
     const schema = Yup.object().shape({
       password: Yup.string()

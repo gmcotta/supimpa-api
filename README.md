@@ -12,7 +12,8 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 - Express
 - Multer
-- SQLite
+- PostgreSQL
+- Docker
 - TypeORM
 - Yup
 - Cors
@@ -40,6 +41,18 @@ yarn
 
 ```
 yarn dev
+```
+
+- Caso tenha Docker, crie um container PostgreSQL. Pode usar o comando abaixo:
+
+```
+docker run --name nlw -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
+```
+
+- Faça as migrations do banco de dados:
+
+```
+yarn typeorm migration:run
 ```
 
 Há um arquivo .json para testar as requisições pelo [Insomnia](https://insomnia.rest/). Basta seguir esse [tutorial](https://support.insomnia.rest/article/52-importing-and-exporting-data).

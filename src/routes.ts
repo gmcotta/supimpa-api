@@ -29,9 +29,9 @@ routes.post('/admin/session', sessionsController.create);
 routes.post('/admin/forgot-password', forgotPasswordController.store);
 routes.post('/admin/reset-password', resetPasswordController.store);
 
+routes.post('/admin/users', adminUsersController.create);
 // Admin private routes
 // routes.use(authMiddleware);
-routes.post('/admin/users', authMiddleware, adminUsersController.create);
 routes.get('/admin/users', authMiddleware, adminUsersController.show);
 routes.put(
   '/admin/institutions/edit/:id',

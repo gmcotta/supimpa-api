@@ -9,7 +9,7 @@ export default {
   render(image: Image): ImageResponse {
     return {
       id: image.id,
-      url: `${process.env.API_URL}/uploads/${image.path}`,
+      url: `https://supimpa-api.herokuapp.com/uploads/${image.path}`,
     };
   },
 
